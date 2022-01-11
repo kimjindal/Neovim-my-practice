@@ -46,18 +46,21 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
-  use 'nvim-lualine/lualine.nvim'
+  use "nvim-lualine/lualine.nvim"
+  use "akinsho/toggleterm.nvim"
+  use "ahmedkhalf/project.nvim"
+  use "lewis6991/impatient.nvim"
 
   -- File explorer
   use "kyazdani42/nvim-web-devicons"
-  use 'kyazdani42/nvim-tree.lua'
+  use "kyazdani42/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
 
   -- Colorschemes
   use "lunarvim/darkplus.nvim"
   use "LunarVim/onedarker.nvim"
-  use 'folke/tokyonight.nvim'
+  use "folke/tokyonight.nvim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion engine for neovim
@@ -82,24 +85,23 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
 
   -- Treesitter
-  use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-  use 'JoosepAlviste/nvim-ts-context-commentstring' -- useful embedded languages types of files.
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use "JoosepAlviste/nvim-ts-context-commentstring" -- useful embedded languages types of files.
 
   -- Git
   use "lewis6991/gitsigns.nvim" -- Super fast git decorations implemented purely in lua
 
-
-
-
-
-
   -- Load on an autocommand event
-  use {'andymass/vim-matchup', event = 'VimEnter'}
+  use { "andymass/vim-matchup", event = "VimEnter" }
   -- Plugins can have post-install/update hooks
-  use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
+  use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" }
   -- Two keymap modes for Surrounding pairs
-  use {'blackCauldron7/surround.nvim', config = function() require'surround'.setup {mappings_style = 'sandwich'} end}
-
+  use {
+    "blackCauldron7/surround.nvim",
+    config = function()
+      require("surround").setup { mappings_style = "sandwich" }
+    end,
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -107,4 +109,3 @@ return packer.startup(function(use)
     require("packer").sync()
   end
 end)
-
