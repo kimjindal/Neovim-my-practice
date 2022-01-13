@@ -43,13 +43,18 @@ return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+  use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "nvim-lualine/lualine.nvim"
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   use "lewis6991/impatient.nvim"
+  use "nathom/filetype.nvim" -- Easily speed up your neovim startup time
+  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+  use "lukas-reineke/indent-blankline.nvim"
+  use "goolord/alpha-nvim" -- This shows a greeter screen when neovim is launched
+  use "folke/which-key.nvim" -- Display a popup with key bindings
 
   -- File explorer
   use "kyazdani42/nvim-web-devicons"
@@ -91,6 +96,9 @@ return packer.startup(function(use)
   -- Git
   use "lewis6991/gitsigns.nvim" -- Super fast git decorations implemented purely in lua
 
+  -- Flutter
+  use "akinsho/flutter-tools.nvim"
+
   -- Load on an autocommand event
   use { "andymass/vim-matchup", event = "VimEnter" }
   -- Plugins can have post-install/update hooks
@@ -103,6 +111,15 @@ return packer.startup(function(use)
     end,
   }
 
+  -- EasyMotion-like plugin
+  use {
+    "phaazon/hop.nvim",
+    branch = "v1", -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+    end,
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

@@ -8,7 +8,6 @@ if not status_ok then
 end
 ]]
 
-
 vim.cmd [[
 try
   colorscheme darkplus
@@ -17,4 +16,3 @@ catch /^Vim\%((\a\+)\)\=:E185/
   set background=dark
 endtry
 ]]
-

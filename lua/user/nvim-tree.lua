@@ -9,7 +9,7 @@ vim.g.nvim_tree_icons = {
     unmerged = "",
     renamed = "➜",
     deleted = "",
-    untracked = "U",
+    untracked = "?",
     ignored = "◌",
   },
   folder = {
@@ -32,6 +32,8 @@ if not config_status_ok then
 end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
+
+vim.g.nvim_tree_respect_buf_cwd = 1 -- set for project.nvim plugin
 
 nvim_tree.setup {
   disable_netrw = true,
@@ -66,7 +68,7 @@ nvim_tree.setup {
   },
   filters = {
     dotfiles = false,
-    custom = {".git", "node_modules", ".cache", ".vscode", ".DS_Store", ".un"}
+    custom = { ".git", "node_modules", ".cache", ".vscode", ".DS_Store", ".un" },
   },
   git = {
     enable = true,

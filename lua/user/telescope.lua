@@ -6,6 +6,7 @@ end
 -- Telescope extension telescope-media-files.nvim
 -- ONLY SUPPORTED ON LINUX
 -- telescope.load_extension('media_files')
+-- telescope.load_extension('flutter')
 
 local actions = require "telescope.actions"
 
