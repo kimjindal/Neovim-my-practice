@@ -13,6 +13,7 @@ configs.setup {
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = { "" }, -- list of language that will be disabled
+    use_languagetree = true,
     additional_vim_regex_highlighting = true,
   },
   indent = { enable = true, disable = { "yaml" } },
@@ -21,3 +22,13 @@ configs.setup {
     enable_autocmd = false,
   },
 }
+
+-- fold, folding settings
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldtext =
+  [[substitute('+- '.getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+vim.wo.fillchars = "fold:\\"
+vim.wo.foldnestmax = 3
+vim.wo.foldminlines = 1
+vim.wo.foldenable = false

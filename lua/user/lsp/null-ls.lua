@@ -7,8 +7,8 @@ end
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
-local completion = null_ls.builtins.completion
-local codeactions = null_ls.builtins.code_actions
+-- local completion = null_ls.builtins.completion
+-- local codeactions = null_ls.builtins.code_actions
 
 null_ls.setup {
   debug = false,
@@ -17,10 +17,7 @@ null_ls.setup {
     formatting.black.with { extra_args = { "--fast" } },
     formatting.dart_format,
     formatting.stylua,
-    formatting.eslint_d,
     diagnostics.flake8,
-    diagnostics.eslint_d,
-    codeactions.eslint_d,
   },
   on_attach = function(client)
     if client.resolved_capabilities.document_formatting then

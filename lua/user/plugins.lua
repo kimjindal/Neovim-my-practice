@@ -43,75 +43,122 @@ return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used by lots of plugins
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "numToStr/Comment.nvim" -- Easily comment stuff
-  use "nvim-lualine/lualine.nvim"
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
-  use "nathom/filetype.nvim" -- Easily speed up your neovim startup time
-  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
-  use "lukas-reineke/indent-blankline.nvim"
-  use "goolord/alpha-nvim" -- This shows a greeter screen when neovim is launched
-  use "folke/which-key.nvim" -- Display a popup with key bindings
-
-  -- File explorer
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
-
-  -- Colorschemes
-  use "lunarvim/darkplus.nvim"
-  use "LunarVim/onedarker.nvim"
-  use "folke/tokyonight.nvim"
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion engine for neovim
-  use "hrsh7th/cmp-nvim-lsp" -- nvim-cmp for neovim builtin LSP client
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lua"
+  use {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-cmdline",
+      "rafamadriz/friendly-snippets",
+    },
+  }
 
   -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use "hrsh7th/cmp-vsnip"
+  use "hrsh7th/vim-vsnip"
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim"
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use {
+    "jose-elias-alvarez/nvim-lsp-ts-utils",
+    requires = {
+      "jose-elias-alvarez/null-ls.nvim",
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  } -- improve typescript
+
+  use { "windwp/nvim-autopairs", config = "require('user.autopairs')", after = "nvim-cmp" }
+  use { "numToStr/Comment.nvim", config = "require('user.comment')" }
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    event = "BufWinEnter",
+    config = "require('user.lualine')",
+  }
+  use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')" }
+  use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufWinEnter" }
+  use { "lewis6991/impatient.nvim", config = "require('user.impatient')" }
+  use "nathom/filetype.nvim" -- Easily speed up your neovim startup time
+  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    config = "require('user.indentline')",
+    event = "BufRead",
+  }
+  use {
+    "goolord/alpha-nvim",
+    event = "BufRead",
+    config = "require('user.alpha')",
+  }
+  use { "folke/which-key.nvim", config = "require('user.whichkey')", event = "BufWinEnter" }
+  use { "blackCauldron7/surround.nvim", config = "require('user.surround')" }
+
+  -- File explorer
+  use {
+    "kyazdani42/nvim-tree.lua",
+    requires = "kyazdani42/nvim-web-devicons",
+    cmd = "NvimTreeToggle",
+    config = "require('user.nvim-tree')",
+  }
+  use {
+    "akinsho/bufferline.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    event = "BufWinEnter",
+    config = "require('user.bufferline')",
+  }
+  use "moll/vim-bbye"
+
+  -- Colorschemes
+  use "rose-pine/neovim"
+  use { "lunarvim/darkplus.nvim", config = "vim.cmd('colorscheme darkplus')" }
 
   -- Telescope
-  use "nvim-telescope/telescope.nvim"
-
-  -- Treesitter
-  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
-  use "JoosepAlviste/nvim-ts-context-commentstring" -- useful embedded languages types of files.
-
-  -- Git
-  use "lewis6991/gitsigns.nvim" -- Super fast git decorations implemented purely in lua
-
-  -- Flutter
-  use "akinsho/flutter-tools.nvim"
-
-  -- Load on an autocommand event
-  use { "andymass/vim-matchup", event = "VimEnter" }
-  -- Plugins can have post-install/update hooks
-  use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" }
-  -- Two keymap modes for Surrounding pairs
   use {
-    "blackCauldron7/surround.nvim",
-    config = function()
-      require("surround").setup { mappings_style = "sandwich" }
-    end,
+    "nvim-telescope/telescope.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    cmd = "Telescope",
+    config = "require('user.telescope')",
   }
 
-  -- EasyMotion-like plugin
+  -- Treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    requires = { "JoosepAlviste/nvim-ts-context-commentstring" },
+    run = ":TSUpdate",
+    event = "BufWinEnter",
+    config = "require('user.treesitter')",
+  }
+
+  -- Git
+  use {
+    "lewis6991/gitsigns.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = "require('user.gitsigns')",
+  }
+
+  -- Flutter
+  use {
+    "akinsho/flutter-tools.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = "require('user.flutter')",
+  }
+
+  use { "andymass/vim-matchup", event = "VimEnter" }
+  use {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && yarn install",
+    cmd = "MarkdownPreview",
+  }
   use {
     "phaazon/hop.nvim",
     branch = "v1", -- optional but strongly recommended
@@ -120,6 +167,7 @@ return packer.startup(function(use)
       require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
     end,
   }
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

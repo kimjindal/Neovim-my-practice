@@ -9,9 +9,9 @@ if not snip_status_ok then
 end
 
 -- For using snippets from a "friendly-snippets" plugin
-require"luasnip".filetype_extend("dart", {"flutter"})
+require("luasnip").filetype_extend("dart", { "flutter" })
 -- LuaSnip: Vscode-like snippets Loader
-require("luasnip.loaders.from_vscode").load({})
+require("luasnip.loaders.from_vscode").load {}
 -- require("luasnip.loaders.from_vscode").lazy_load()
 
 local check_backspace = function()
@@ -57,7 +57,7 @@ cmp.setup {
   },
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     -- ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     -- ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -108,6 +108,7 @@ cmp.setup {
         nvim_lsp = "[Lsp]",
         nvim_lua = "[NvimLua]",
         luasnip = "[Snippet]",
+        vsnip = "[Vsnip]",
         buffer = "[Buffer]",
         path = "[Path]",
       })[entry.source.name]
@@ -118,6 +119,7 @@ cmp.setup {
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "luasnip" },
+    { name = "vsnip" },
     { name = "buffer" },
     { name = "path" },
   },

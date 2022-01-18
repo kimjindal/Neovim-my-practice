@@ -41,9 +41,10 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
 
 --[[ Insert ]]
---
+keymap("n", "<CR>", "o<Esc>", {})
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
+keymap("v", "jk", "<ESC>", opts)
 -- Move cursor forward, backward
 keymap("i", "<C-f>", "<C-o>l", opts)
 keymap("i", "<C-b>", "<C-o>h", opts)
@@ -76,5 +77,5 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- [[ Hop.nvim, EasyMotion-like plugin ]] --
-keymap("n", "f", "<cmd>HopWord<cr>", opts)
-keymap("n", "F", "<cmd>HopLine<cr>", opts)
+keymap("n", "<C-f>", "<cmd>HopWord<cr>", opts)
+keymap("n", "<C-b>", "<cmd>HopLine<cr>", opts)
