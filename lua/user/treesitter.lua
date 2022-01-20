@@ -4,11 +4,29 @@ if not status_ok then
 end
 
 configs.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = {
+    "bash",
+    "css",
+    "dart",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "perl",
+    "php",
+    "python",
+    "regex",
+    "typescript",
+    "vim",
+  },
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "" }, -- List of parsers to ignore installing
   autopairs = {
     enable = true,
+  },
+  autotag = {
+    enable = true,
+    filetypes = { "html", "javascript", "javascriptreact", "typescriptreact", "php" },
   },
   highlight = {
     enable = true, -- false will disable the whole extension
@@ -27,7 +45,7 @@ configs.setup {
 vim.wo.foldmethod = "expr"
 vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 vim.wo.foldtext =
-  [[substitute('+- '.getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
+  [[substitute(' '.getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 vim.wo.fillchars = "fold:\\"
 vim.wo.foldnestmax = 3
 vim.wo.foldminlines = 1

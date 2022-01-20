@@ -37,6 +37,33 @@ local filetype = {
   icon = nil,
 }
 
+-- local fileformat = {
+--   "fileformat",
+--   icons_enabled = false,
+--   icon = nil,
+-- }
+
+local lspname = {
+  function()
+    local msg = "No Active Lsp"
+    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return msg
+    end
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      local autostart = client.config.autostart
+      if filetypes and autostart and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return client.name
+      end
+    end
+    return msg
+  end,
+  icons_enabled = true,
+  icon = "歷",
+}
+
 local branch = {
   "branch",
   icons_enabled = true,
@@ -59,13 +86,13 @@ local progress = function()
 end
 
 local spaces = function()
-  return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+  return "﬌ " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = "auto",
+    theme = "darkplus", -- auto
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
@@ -75,8 +102,7 @@ lualine.setup {
     lualine_a = { branch, diagnostics },
     lualine_b = { mode },
     lualine_c = {},
-    -- lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_x = { diff, spaces, "encoding", filetype },
+    lualine_x = { diff, spaces, lspname, filetype, "encoding" },
     lualine_y = { location },
     lualine_z = { progress },
   },
