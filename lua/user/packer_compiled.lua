@@ -127,8 +127,13 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-path"
   },
   ["cmp-vsnip"] = {
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
+    after_files = { "/Users/apple/.local/share/nvim/site/pack/packer/opt/cmp-vsnip/after/plugin/cmp_vsnip.vim" },
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   cmp_luasnip = {
@@ -141,6 +146,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/apple/.local/share/nvim/site/pack/packer/start/darkplus.nvim",
     url = "https://github.com/lunarvim/darkplus.nvim"
+  },
+  ["fidget.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
   },
   ["filetype.nvim"] = {
     loaded = true,
@@ -158,10 +171,17 @@ _G.packer_plugins = {
     path = "/Users/apple/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["github-nvim-theme"] = {
+    loaded = true,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/github-nvim-theme",
+    url = "https://github.com/projekt0n/github-nvim-theme"
+  },
   ["gitsigns.nvim"] = {
     config = { "require('user.gitsigns')" },
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
   ["hop.nvim"] = {
@@ -183,6 +203,12 @@ _G.packer_plugins = {
     path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["lspsaga.nvim"] = {
+    config = { "require('user.lspsaga')" },
+    loaded = true,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/tami5/lspsaga.nvim"
+  },
   ["lualine.nvim"] = {
     config = { "require('user.lualine')" },
     loaded = false,
@@ -199,10 +225,10 @@ _G.packer_plugins = {
     path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/markdown-preview.nvim",
     url = "https://github.com/iamcco/markdown-preview.nvim"
   },
-  neovim = {
+  melange = {
     loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/neovim",
-    url = "https://github.com/rose-pine/neovim"
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/melange",
+    url = "https://github.com/savq/melange"
   },
   ["nlsp-settings.nvim"] = {
     loaded = true,
@@ -216,16 +242,22 @@ _G.packer_plugins = {
   },
   ["nvim-autopairs"] = {
     config = { "require('user.autopairs')" },
-    load_after = {},
-    loaded = true,
+    load_after = {
+      ["nvim-cmp"] = true
+    },
+    loaded = false,
     needs_bufread = false,
     path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "nvim-autopairs" },
-    loaded = true,
-    only_config = true
+    after = { "nvim-autopairs", "cmp-vsnip" },
+    config = { "require('user.cmp')" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-colorizer.lua"] = {
     config = { "\27LJ\2\nW\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\5\0\0\bcss\15javascript\thtml\blua\nsetup\14colorizer\frequire\0" },
@@ -277,8 +309,10 @@ _G.packer_plugins = {
     url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
   },
   ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
@@ -306,8 +340,10 @@ _G.packer_plugins = {
   },
   ["surround.nvim"] = {
     config = { "require('user.surround')" },
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/surround.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/surround.nvim",
     url = "https://github.com/blackCauldron7/surround.nvim"
   },
   ["telescope.nvim"] = {
@@ -354,30 +390,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-require('user.toggleterm')
-time([[Config for toggleterm.nvim]], false)
--- Config for: darkplus.nvim
-time([[Config for darkplus.nvim]], true)
-vim.cmd('colorscheme darkplus')
-time([[Config for darkplus.nvim]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require('user.lsp')
+time([[Config for nvim-lspconfig]], false)
+-- Config for: lspsaga.nvim
+time([[Config for lspsaga.nvim]], true)
+require('user.lspsaga')
+time([[Config for lspsaga.nvim]], false)
 -- Config for: hop.nvim
 time([[Config for hop.nvim]], true)
 try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
 time([[Config for hop.nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require('user.cmp')
-time([[Config for nvim-cmp]], false)
--- Config for: surround.nvim
-time([[Config for surround.nvim]], true)
-require('user.surround')
-time([[Config for surround.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-require('user.gitsigns')
-time([[Config for gitsigns.nvim]], false)
 -- Config for: Comment.nvim
 time([[Config for Comment.nvim]], true)
 require('user.comment')
@@ -386,37 +410,42 @@ time([[Config for Comment.nvim]], false)
 time([[Config for nvim-treesitter]], true)
 require('user.treesitter')
 time([[Config for nvim-treesitter]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+require('user.toggleterm')
+time([[Config for toggleterm.nvim]], false)
 -- Config for: flutter-tools.nvim
 time([[Config for flutter-tools.nvim]], true)
 require('user.flutter')
 time([[Config for flutter-tools.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require('user.lsp')
-time([[Config for nvim-lspconfig]], false)
+-- Config for: darkplus.nvim
+time([[Config for darkplus.nvim]], true)
+vim.cmd('colorscheme darkplus')
+time([[Config for darkplus.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd nvim-autopairs ]]
+vim.cmd [[ packadd null-ls.nvim ]]
+vim.cmd [[ packadd fidget.nvim ]]
 
--- Config for: nvim-autopairs
-require('user.autopairs')
+-- Config for: fidget.nvim
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
 
 time([[Sequenced loading]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
+pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file MarkdownPreview lua require("packer.load")({'markdown-preview.nvim'}, { cmd = "MarkdownPreview", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file Telescope lua require("packer.load")({'telescope.nvim'}, { cmd = "Telescope", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
-pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'bufferline.nvim', 'lualine.nvim', 'project.nvim', 'which-key.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au VimEnter * ++once lua require("packer.load")({'vim-matchup'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-colorizer.lua', 'alpha-nvim', 'indent-blankline.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'bufferline.nvim', 'alpha-nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'lualine.nvim', 'indent-blankline.nvim', 'project.nvim', 'nvim-web-devicons', 'surround.nvim', 'gitsigns.nvim', 'nvim-colorizer.lua', 'nvim-cmp', 'which-key.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

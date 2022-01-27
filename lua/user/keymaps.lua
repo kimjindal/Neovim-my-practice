@@ -41,7 +41,7 @@ keymap("n", "<A-j>", "<Esc>:m .+1<CR>==", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
 
 --[[ Insert ]]
-keymap("n", "<CR>", "o<Esc>", opts)
+-- keymap("n", "<CR>", "o<Esc>", opts)
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 keymap("v", "jk", "<ESC>", opts)

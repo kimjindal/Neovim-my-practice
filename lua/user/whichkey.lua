@@ -79,23 +79,26 @@ local opts = {
 }
 
 local mappings = {
+  ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-  ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
-
+  ["h"] = { "<Cmd>nohlsearch<CR>", "No Highlight" },
+  ["j"] = { "o<Esc>", "Insert Blank Line" },
+  ["m"] = { "<Cmd>lua require('material.functions').toggle_style()<CR>", "Material" },
+  ["q"] = { "<cmd>q!<CR>", "Quit" },
+  ["w"] = { "<cmd>w!<CR>", "Save" },
+  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["T"] = { "<cmd>Telescope colorscheme<cr>", "Themes" },
   p = {
     name = "Packer",
     c = { "<cmd>PackerCompile<cr>", "Compile" },
@@ -104,7 +107,6 @@ local mappings = {
     S = { "<cmd>PackerStatus<cr>", "Status" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
-
   g = {
     name = "Git",
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
@@ -112,9 +114,11 @@ local mappings = {
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
     l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
     p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    q = { "<cmd>lua require 'gitsigns'.setqflist()<cr>", "List Quickfix" },
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    t = { "<cmd>lua require 'gitsigns'.toggle_current_line_blame()<cr>", "Show Line Blame" },
     u = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       "Undo Stage Hunk",
@@ -123,16 +127,15 @@ local mappings = {
     b = { "<cmd>Telescope git_branches<cr>", "Git branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Git commit" },
     d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "<cmd>Gitsigns diffthis HEAD~1<cr>",
       "Diff",
     },
   },
-
   l = {
     name = "LSP",
-    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
     d = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>",
+      "<cmd>Telescope diagnostics<cr>",
       "Document Diagnostics",
     },
     w = {
@@ -140,24 +143,28 @@ local mappings = {
       "Workspace Diagnostics",
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    g = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show Line Diagnostics" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
-      "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+      "<cmd>Lspsaga diagnostic_jump_next<cr>",
       "Next Diagnostic",
     },
     k = {
-      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+      "<cmd>Lspsaga diagnostic_jump_prev<cr>",
       "Prev Diagnostic",
     },
+    K = { "<cmd>Lspsaga hover_doc<cr>", "Hover Document" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    n = { "<cmd>NullLsInfo<cr>", "Null-ls Info" },
+    q = { "<cmd>lua vim.diagnostic.setqflist({open=true})<cr>", "Quickfix" },
+    r = { "<cmd>Lspsaga rename<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
     },
+    x = { "<c-u>Lspsaga range_code_action<cr>", "Range Code Action" },
   },
   s = {
     name = "Search",
@@ -170,7 +177,6 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
-
   t = {
     name = "Terminal",
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },

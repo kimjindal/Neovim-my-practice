@@ -33,7 +33,9 @@ local options = {
   wrap = false, -- display lines as one long line
   scrolloff = 8, -- is one of my fav
   sidescrolloff = 8,
-  guifont = "monospace:h17", -- the font used in graphical neovim applications
+  -- guifont = "monospace:h17", -- the font used in graphical neovim applications
+  path = ".,,,$PWD/**",
+  inccommand = "split", -- show a preview window for substitute command
 }
 
 vim.opt.shortmess:append "c"
@@ -48,5 +50,6 @@ vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 
 vim.g.cursorhold_updatetime = 100 -- set for FixCursorHold.nvim plugin
 vim.g.did_load_filetypes = 1 -- set for filetype.nvim plugin
+vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets/"
 vim.g.ruby_host_prog = "/usr/local/lib/ruby/gems/3.0.0/bin/neovim-ruby-host"
 vim.g.python3_host_prog = "/usr/local/bin/python3"

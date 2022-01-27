@@ -2,14 +2,13 @@ require "user.impatient"
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
-require "user.packer_compiled"
 require "user.autocommands"
+require "user.packer_compiled"
 
 --[[ Lazy Loading Plugins
 require "user.lsp"
 require "user.cmp"
 require "user.treesitter"
-require "user.flutter"
 require "user.colorscheme"
 require "user.lualine"
 require "user.bufferline"
@@ -24,4 +23,5 @@ require "user.alpha"
 require "user.whichkey"
 require "user.surround"
 require "user.project"
--- End ]]
+require "user.flutter"
+-- -- End ]]

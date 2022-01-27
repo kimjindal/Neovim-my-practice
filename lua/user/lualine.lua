@@ -20,14 +20,23 @@ local diagnostics = {
 local diff = {
   "diff",
   colored = false,
-  symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+  symbols = { added = " ", modified = " ", removed = " " },
   cond = hide_in_width,
 }
 
 local mode = {
   "mode",
   fmt = function(str)
-    return "-- " .. str .. " --"
+    local m = string.sub(str, 1, 1)
+    if m == "N" then
+      return ""
+    elseif m == "I" then
+      return ""
+    elseif m == "V" then
+      return ""
+    elseif m == "C" then
+      return "﬍"
+    end
   end,
 }
 
@@ -35,6 +44,18 @@ local filetype = {
   "filetype",
   icons_enabled = false,
   icon = nil,
+}
+
+local filename = {
+  "filename",
+  file_status = true,
+  path = 1,
+  shorting_target = 40,
+  symbols = {
+    modified = "+",
+    readonly = "-",
+    unnamed = "[No Name]",
+  },
 }
 
 -- local fileformat = {
@@ -99,17 +120,17 @@ lualine.setup {
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = { branch, diagnostics },
-    lualine_b = { mode },
+    lualine_a = { mode },
+    lualine_b = { branch, diagnostics, filename },
     lualine_c = {},
-    lualine_x = { diff, spaces, lspname, filetype, "encoding" },
+    lualine_x = { diff, spaces, lspname, filetype },
     lualine_y = { location },
     lualine_z = { progress },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { "filename" },
+    lualine_c = { filename },
     lualine_x = { "location" },
     lualine_y = {},
     lualine_z = {},

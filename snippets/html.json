@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "prefix": "scripts",
+    "body": "<script src=\"$1\"></script>$2"
+  },
+  "scriptt": {
+    "prefix": "scriptt",
+    "body": "<script type=\"text/javascript\" src=\"$1\"></script>$2"
+  }
+}

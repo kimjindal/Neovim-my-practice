@@ -44,41 +44,52 @@ return packer.startup {
     -- My plugins here
     use "lewis6991/impatient.nvim"
     use "wbthomason/packer.nvim" -- Have packer manage itself
+    use "nvim-lua/plenary.nvim" -- All the lua functions
     use "nathom/filetype.nvim" -- Easily speed up your neovim startup time
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-    use "kyazdani42/nvim-web-devicons"
+    use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
     -- LSP
     use { "neovim/nvim-lspconfig", config = "require('user.lsp')" }
     use "williamboman/nvim-lsp-installer" -- simple to use language server installer
     use "tamago324/nlsp-settings.nvim"
     use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+    use { "jose-elias-alvarez/nvim-lsp-ts-utils" }
+    use { "tami5/lspsaga.nvim", config = "require('user.lspsaga')" }
     use {
-      "jose-elias-alvarez/nvim-lsp-ts-utils",
-      requires = {
-        "nvim-lua/plenary.nvim",
-      },
-    } -- improve typescript
+      "j-hui/fidget.nvim",
+      config = function()
+        require("fidget").setup {}
+      end,
+      after = "null-ls.nvim",
+    }
 
     -- cmp pluins
     use {
       "hrsh7th/nvim-cmp",
+      event = "BufRead",
       requires = {
         "hrsh7th/cmp-nvim-lsp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-cmdline",
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
       },
       config = "require('user.cmp')",
     }
 
     -- snippets
-    use "hrsh7th/cmp-vsnip"
-    use "hrsh7th/vim-vsnip"
+    use {
+      "hrsh7th/cmp-vsnip",
+      after = "nvim-cmp",
+      requires = {
+        "hrsh7th/vim-vsnip",
+        after = "LuaSnip",
+      },
+    }
 
     -- Treesitter
     use {
@@ -96,10 +107,10 @@ return packer.startup {
     use { "numToStr/Comment.nvim", config = "require('user.comment')" }
     use {
       "nvim-lualine/lualine.nvim",
-      event = "BufWinEnter",
+      event = "BufRead",
       config = "require('user.lualine')",
     }
-    use { "blackCauldron7/surround.nvim", config = "require('user.surround')" }
+    use { "blackCauldron7/surround.nvim", config = "require('user.surround')", event = "BufRead" }
 
     -- File explorer
     use {
@@ -114,7 +125,7 @@ return packer.startup {
     }
     use "moll/vim-bbye"
     use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')" }
-    use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufWinEnter" }
+    use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufRead" }
     use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
     use {
       "lukas-reineke/indent-blankline.nvim",
@@ -122,17 +133,19 @@ return packer.startup {
       event = "BufRead",
     }
 
-    -- Startfiy
+    -- Startify
     use {
       "goolord/alpha-nvim",
-      event = "BufRead",
+      event = "BufWinEnter",
       config = "require('user.alpha')",
     }
-    use { "folke/which-key.nvim", config = "require('user.whichkey')", event = "BufWinEnter" }
+    use { "folke/which-key.nvim", config = "require('user.whichkey')", event = "BufRead" }
 
     -- Colorschemes
-    use "rose-pine/neovim"
     use { "lunarvim/darkplus.nvim", config = "vim.cmd('colorscheme darkplus')" }
+    use "projekt0n/github-nvim-theme"
+    use "savq/melange"
+
     use {
       "norcalli/nvim-colorizer.lua",
       config = function()
@@ -149,7 +162,6 @@ return packer.startup {
     -- Telescope
     use {
       "nvim-telescope/telescope.nvim",
-      requires = { { "nvim-lua/plenary.nvim" } },
       cmd = "Telescope",
       config = "require('user.telescope')",
     }
@@ -157,14 +169,13 @@ return packer.startup {
     -- Git
     use {
       "lewis6991/gitsigns.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
+      event = "BufRead",
       config = "require('user.gitsigns')",
     }
 
     -- Flutter
     use {
       "akinsho/flutter-tools.nvim",
-      requires = "nvim-lua/plenary.nvim",
       config = "require('user.flutter')",
     }
 

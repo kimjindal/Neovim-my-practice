@@ -24,7 +24,7 @@ M.setup = function()
     underline = false,
     severity_sort = true,
     float = {
-      focusable = false,
+      focusable = true,
       style = "minimal",
       border = "rounded",
       source = "always",
@@ -49,12 +49,12 @@ local function lsp_highlight_document(client)
   if client.resolved_capabilities.document_highlight then
     vim.api.nvim_exec(
       [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
+        augroup lsp_document_highlight
+          autocmd! * <buffer>
+          autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+          autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        augroup END
+      ]],
       false
     )
   end
@@ -97,5 +97,16 @@ if not status_ok then
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
+--[[
+vim.g.diagnostics_visible = true
+function _G.toggle_diagnostics()
+  if vim.g.diagnostics_visible then
+    vim.g.diagnostics_visible = false
+    vim.diagnostic.disable()
+  else
+    vim.g.diagnostics_visible = true
+    vim.diagnostic.enable()
+  end
+end
+]]
 return M
