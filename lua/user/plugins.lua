@@ -48,6 +48,7 @@ return packer.startup {
     use "nathom/filetype.nvim" -- Easily speed up your neovim startup time
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
+    use "digitaltoad/vim-pug"
 
     -- LSP
     use { "neovim/nvim-lspconfig", config = "require('user.lsp')" }
@@ -143,9 +144,7 @@ return packer.startup {
 
     -- Colorschemes
     use { "lunarvim/darkplus.nvim", config = "vim.cmd('colorscheme darkplus')" }
-    use "projekt0n/github-nvim-theme"
-    use "savq/melange"
-
+    use "ellisonleao/gruvbox.nvim"
     use {
       "norcalli/nvim-colorizer.lua",
       config = function()

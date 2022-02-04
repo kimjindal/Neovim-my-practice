@@ -46,7 +46,7 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==", opts)
 keymap("i", "jk", "<ESC>", opts)
 keymap("v", "jk", "<ESC>", opts)
 -- Move cursor forward, backward
-keymap("i", "<C-f>", "<C-o>l", opts)
+keymap("i", "<C-f>", "<Right>", opts)
 keymap("i", "<C-b>", "<C-o>h", opts)
 
 --[[ Visual ]]

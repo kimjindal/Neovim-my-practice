@@ -159,6 +159,7 @@ local mappings = {
     n = { "<cmd>NullLsInfo<cr>", "Null-ls Info" },
     q = { "<cmd>lua vim.diagnostic.setqflist({open=true})<cr>", "Quickfix" },
     r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+    R = { "<cmd>Telescope lsp_references<cr>", "References" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",

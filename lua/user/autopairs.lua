@@ -6,6 +6,9 @@ end
 
 npairs.setup {
   check_ts = true,
+  enable_moveright = true,
+  map_c_h = true, -- Map the <C-h> key to delete a pair
+  map_c_w = true, -- Map <C-w> to delete a pair if possible
   enable_check_bracket_line = true,
   ts_config = {
     lua = { "string", "source" },

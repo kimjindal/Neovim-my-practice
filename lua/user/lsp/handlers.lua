@@ -81,15 +81,24 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
+  -- Disable formatting with other LSPs because we're handling formatting via null-ls
+  -- local servers = { "tsserver", "html", "css" }
+  -- for _, lsp in ipairs(servers) do
+  --   if client.name == lsp then
+  --     client.resolved_capabilities.document_formatting = false
+  --   end
+  -- end
+  if client.name ~= "null-ls" then
     client.resolved_capabilities.document_formatting = false
   end
+
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
 
 -- The nvim-cmp almost supports LPS's capabilities so You should advertise it to LSP servers.
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Plugin cmp_nvim_lsp setup : nvim-cmp source for neovim builtin LSP client
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
@@ -97,16 +106,5 @@ if not status_ok then
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
---[[
-vim.g.diagnostics_visible = true
-function _G.toggle_diagnostics()
-  if vim.g.diagnostics_visible then
-    vim.g.diagnostics_visible = false
-    vim.diagnostic.disable()
-  else
-    vim.g.diagnostics_visible = true
-    vim.diagnostic.enable()
-  end
-end
-]]
+
 return M
