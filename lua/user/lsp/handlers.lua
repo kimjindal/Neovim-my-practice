@@ -3,10 +3,10 @@ local M = {}
 -- TODO: backfill this to template
 M.setup = function()
   local signs = {
-    { name = "DiagnosticSignError", text = " " },
-    { name = "DiagnosticSignWarn", text = " " },
-    { name = "DiagnosticSignHint", text = " " },
-    { name = "DiagnosticSignInfo", text = " " },
+    { name = "DiagnosticSignError", text = "e" },
+    { name = "DiagnosticSignWarn", text = "w" },
+    { name = "DiagnosticSignHint", text = "h" },
+    { name = "DiagnosticSignInfo", text = "i" },
   }
 
   for _, sign in ipairs(signs) do
@@ -14,9 +14,7 @@ M.setup = function()
   end
 
   local config = {
-    -- disable virtual text
     virtual_text = false,
-    -- show signs
     signs = {
       active = signs,
     },

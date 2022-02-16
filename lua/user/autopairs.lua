@@ -7,8 +7,8 @@ end
 npairs.setup {
   check_ts = true,
   enable_moveright = true,
-  map_c_h = true, -- Map the <C-h> key to delete a pair
-  map_c_w = true, -- Map <C-w> to delete a pair if possible
+  map_c_h = true,
+  map_c_w = true,
   enable_check_bracket_line = true,
   ts_config = {
     lua = { "string", "source" },
@@ -20,7 +20,7 @@ npairs.setup {
     map = "<M-e>",
     chars = { "{", "[", "(", '"', "'" },
     pattern = string.gsub([[ [%'%"%)%>%s%]%)%}%,] ]], "%s+", ""),
-    offset = -1, -- Offset from pattern match
+    offset = -1,
     end_key = "$",
     keys = "qwertyuiopzxcvbnmasdfghjkl",
     check_comma = true,

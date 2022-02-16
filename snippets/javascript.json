@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "prefix": "aps",
-    "body": "app.set($1);$2"
+    "prefix": "req",
+    "body": "require('$1');$2"
   }
 }

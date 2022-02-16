@@ -7,14 +7,14 @@ vim.g.nvim_tree_icons = {
     unstaged = "",
     staged = "S",
     unmerged = "",
-    renamed = "➜",
-    deleted = "",
-    untracked = "?",
+    renamed = "",
+    deleted = "ﯰ",
+    untracked = "U",
     ignored = "◌",
   },
   folder = {
-    default = "",
-    open = "",
+    default = "",
+    open = "ﱮ",
     empty = "",
     empty_open = "",
     symlink = "",
@@ -33,7 +33,7 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-vim.g.nvim_tree_respect_buf_cwd = 1 -- set for project.nvim plugin
+-- vim.g.nvim_tree_respect_buf_cwd = 1 -- set for project.nvim plugin
 
 nvim_tree.setup {
   disable_netrw = true,
@@ -47,10 +47,10 @@ nvim_tree.setup {
   auto_close = true,
   open_on_tab = false,
   hijack_cursor = false,
-  update_cwd = true,
+  update_cwd = false,
   update_to_buf_dir = {
-    enable = true,
-    auto_open = true,
+    enable = false,
+    auto_open = false,
   },
   diagnostics = {
     enable = true,

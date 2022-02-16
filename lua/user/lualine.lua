@@ -11,7 +11,7 @@ local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn" },
-  symbols = { error = " ", warn = " " },
+  symbols = { error = " ", warn = " " },
   colored = false,
   update_in_insert = false,
   always_visible = true,
@@ -20,7 +20,7 @@ local diagnostics = {
 local diff = {
   "diff",
   colored = false,
-  symbols = { added = " ", modified = " ", removed = " " },
+  symbols = { added = "ﰂ ", modified = " ", removed = "ﯰ " },
   cond = hide_in_width,
 }
 
@@ -29,11 +29,11 @@ local mode = {
   fmt = function(str)
     local m = string.sub(str, 1, 1)
     if m == "N" then
-      return ""
+      return ""
     elseif m == "I" then
-      return ""
+      return ""
     elseif m == "V" then
-      return ""
+      return ""
     elseif m == "C" then
       return "﬍"
     end
@@ -42,7 +42,7 @@ local mode = {
 
 local filetype = {
   "filetype",
-  icons_enabled = false,
+  icons_enabled = true,
   icon = nil,
 }
 
@@ -82,7 +82,7 @@ local lspname = {
     return msg
   end,
   icons_enabled = true,
-  icon = "歷",
+  icon = "",
 }
 
 local branch = {

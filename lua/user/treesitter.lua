@@ -19,8 +19,8 @@ configs.setup {
     "typescript",
     "vim",
   },
-  sync_install = true, -- install languages synchronously (only applied to `ensure_installed`)
-  ignore_install = { "" }, -- List of parsers to ignore installing
+  sync_install = true,
+  ignore_install = { "" },
   autopairs = {
     enable = true,
   },
@@ -29,8 +29,8 @@ configs.setup {
     filetypes = { "html", "javascript", "javascriptreact", "typescriptreact", "php" },
   },
   highlight = {
-    enable = true, -- false will disable the whole extension
-    disable = { "" }, -- list of language that will be disabled
+    enable = true,
+    disable = { "" },
     use_languagetree = true,
     additional_vim_regex_highlighting = true,
   },

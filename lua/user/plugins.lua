@@ -42,33 +42,34 @@ packer.init {
 return packer.startup {
   function(use)
     -- My plugins here
+    use "wbthomason/packer.nvim"
+    use "nvim-lua/plenary.nvim"
+    use "nvim-lua/popup.nvim"
+    use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
-    use "wbthomason/packer.nvim" -- Have packer manage itself
-    use "nvim-lua/plenary.nvim" -- All the lua functions
-    use "nathom/filetype.nvim" -- Easily speed up your neovim startup time
-    use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
+    use "ggandor/lightspeed.nvim" -- This is like sneak or easymotion
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
-    use "digitaltoad/vim-pug"
 
     -- LSP
     use { "neovim/nvim-lspconfig", config = "require('user.lsp')" }
-    use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+    use "williamboman/nvim-lsp-installer"
     use "tamago324/nlsp-settings.nvim"
-    use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+    use "jose-elias-alvarez/null-ls.nvim"
     use { "jose-elias-alvarez/nvim-lsp-ts-utils" }
     use { "tami5/lspsaga.nvim", config = "require('user.lspsaga')" }
-    use {
-      "j-hui/fidget.nvim",
-      config = function()
-        require("fidget").setup {}
-      end,
-      after = "null-ls.nvim",
-    }
+    -- use "digitaltoad/vim-pug" -- Vim syntax highlighting for Pug(Jade)
+    -- use {
+    --   "j-hui/fidget.nvim",
+    --   config = function()
+    --     require("fidget").setup {}
+    --   end,
+    --   after = "null-ls.nvim",
+    -- }
 
-    -- cmp pluins
+    -- cmp & snippet pluins
     use {
       "hrsh7th/nvim-cmp",
-      event = "BufRead",
+      -- event = "BufRead",
       requires = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -80,16 +81,6 @@ return packer.startup {
         "rafamadriz/friendly-snippets",
       },
       config = "require('user.cmp')",
-    }
-
-    -- snippets
-    use {
-      "hrsh7th/cmp-vsnip",
-      after = "nvim-cmp",
-      requires = {
-        "hrsh7th/vim-vsnip",
-        after = "LuaSnip",
-      },
     }
 
     -- Treesitter
@@ -106,19 +97,10 @@ return packer.startup {
     use { "windwp/nvim-autopairs", config = "require('user.autopairs')", after = "nvim-cmp" }
     use { "andymass/vim-matchup", event = "VimEnter" }
     use { "numToStr/Comment.nvim", config = "require('user.comment')" }
-    use {
-      "nvim-lualine/lualine.nvim",
-      event = "BufRead",
-      config = "require('user.lualine')",
-    }
-    use { "blackCauldron7/surround.nvim", config = "require('user.surround')", event = "BufRead" }
+    use { "ur4ltz/surround.nvim", config = "require('user.surround')", event = "BufRead" }
 
     -- File explorer
-    use {
-      "kyazdani42/nvim-tree.lua",
-      cmd = "NvimTreeToggle",
-      config = "require('user.nvim-tree')",
-    }
+    use "kyazdani42/nvim-tree.lua"
     use {
       "akinsho/bufferline.nvim",
       event = "BufWinEnter",
@@ -144,7 +126,11 @@ return packer.startup {
 
     -- Colorschemes
     use { "lunarvim/darkplus.nvim", config = "vim.cmd('colorscheme darkplus')" }
-    use "ellisonleao/gruvbox.nvim"
+    use {
+      "nvim-lualine/lualine.nvim",
+      event = "BufRead",
+      config = "require('user.lualine')",
+    }
     use {
       "norcalli/nvim-colorizer.lua",
       config = function()
@@ -173,26 +159,17 @@ return packer.startup {
     }
 
     -- Flutter
-    use {
-      "akinsho/flutter-tools.nvim",
-      config = "require('user.flutter')",
-    }
+    -- use {
+    --   "akinsho/flutter-tools.nvim",
+    --   config = "require('user.flutter')",
+    -- }
 
     -- Markdown
-    use {
-      "iamcco/markdown-preview.nvim",
-      run = "cd app && yarn install",
-      cmd = "MarkdownPreview",
-    }
-
-    -- EasyMotion, see :h hop-config
-    use {
-      "phaazon/hop.nvim",
-      branch = "v1",
-      config = function()
-        require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
-      end,
-    }
+    -- use {
+    --   "iamcco/markdown-preview.nvim",
+    --   run = "cd app && yarn install",
+    --   cmd = "MarkdownPreview",
+    -- }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
@@ -200,6 +177,7 @@ return packer.startup {
       require("packer").sync()
     end
   end,
+  -- Lazyloading packer_compiled file path for impatient.nvim
   config = {
     compile_path = vim.fn.stdpath "config" .. "/lua/user/packer_compiled.lua",
   },
