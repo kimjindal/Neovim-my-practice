@@ -33,7 +33,7 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
--- vim.g.nvim_tree_respect_buf_cwd = 1 -- set for project.nvim plugin
+vim.g.nvim_tree_respect_buf_cwd = 1 -- set for project.nvim plugin
 
 nvim_tree.setup {
   disable_netrw = true,
@@ -45,15 +45,16 @@ nvim_tree.setup {
     "alpha",
   },
   auto_close = true,
+  auto_reload_on_write = true,
   open_on_tab = false,
   hijack_cursor = false,
-  update_cwd = false,
+  update_cwd = true,
   update_to_buf_dir = {
-    enable = false,
-    auto_open = false,
+    enable = true,
+    auto_open = true,
   },
   diagnostics = {
-    enable = true,
+    enable = false,
     icons = {
       hint = "",
       info = "",
@@ -71,7 +72,7 @@ nvim_tree.setup {
     custom = { ".git", "node_modules", ".cache", ".vscode", ".DS_Store", ".un" },
   },
   git = {
-    enable = true,
+    enable = false,
     ignore = true,
     timeout = 500,
   },

@@ -71,8 +71,10 @@ time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["Comment.nvim"] = {
     config = { "require('user.comment')" },
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
   ["FixCursorHold.nvim"] = {
@@ -173,12 +175,6 @@ _G.packer_plugins = {
     path = "/Users/apple/.local/share/nvim/site/pack/packer/start/lightspeed.nvim",
     url = "https://github.com/ggandor/lightspeed.nvim"
   },
-  ["lspsaga.nvim"] = {
-    config = { "require('user.lspsaga')" },
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
-    url = "https://github.com/tami5/lspsaga.nvim"
-  },
   ["lualine.nvim"] = {
     config = { "require('user.lualine')" },
     loaded = false,
@@ -235,8 +231,11 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    config = { "require('user.nvim-tree')" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
     url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
@@ -304,13 +303,17 @@ _G.packer_plugins = {
   },
   ["toggleterm.nvim"] = {
     config = { "require('user.toggleterm')" },
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["vim-bbye"] = {
-    loaded = true,
-    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/vim-bbye",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
   },
   ["vim-matchup"] = {
@@ -332,34 +335,22 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-treesitter
-time([[Config for nvim-treesitter]], true)
-require('user.treesitter')
-time([[Config for nvim-treesitter]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require('user.lsp')
-time([[Config for nvim-lspconfig]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-require('user.toggleterm')
-time([[Config for toggleterm.nvim]], false)
--- Config for: lspsaga.nvim
-time([[Config for lspsaga.nvim]], true)
-require('user.lspsaga')
-time([[Config for lspsaga.nvim]], false)
--- Config for: darkplus.nvim
-time([[Config for darkplus.nvim]], true)
-vim.cmd('colorscheme darkplus')
-time([[Config for darkplus.nvim]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-require('user.comment')
-time([[Config for Comment.nvim]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require('user.cmp')
 time([[Config for nvim-cmp]], false)
+-- Config for: darkplus.nvim
+time([[Config for darkplus.nvim]], true)
+vim.cmd('colorscheme darkplus')
+time([[Config for darkplus.nvim]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require('user.lsp')
+time([[Config for nvim-lspconfig]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+require('user.treesitter')
+time([[Config for nvim-treesitter]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-autopairs ]]
@@ -378,9 +369,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'alpha-nvim', 'bufferline.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'vim-matchup'}, { event = "VimEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'project.nvim', 'indent-blankline.nvim', 'surround.nvim', 'lualine.nvim', 'which-key.nvim', 'nvim-web-devicons', 'gitsigns.nvim', 'nvim-colorizer.lua'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'surround.nvim', 'project.nvim', 'gitsigns.nvim', 'nvim-tree.lua', 'Comment.nvim', 'which-key.nvim', 'nvim-colorizer.lua', 'nvim-web-devicons', 'vim-matchup', 'vim-bbye', 'lualine.nvim', 'toggleterm.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'bufferline.nvim', 'alpha-nvim', 'indent-blankline.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

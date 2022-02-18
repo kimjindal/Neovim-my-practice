@@ -90,7 +90,7 @@ local mappings = {
   ["m"] = { "<Cmd>lua require('material.functions').toggle_style()<CR>", "Material" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
-  ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["T"] = { "<cmd>Telescope colorscheme<cr>", "Themes" },
   p = {
     name = "Packer",
@@ -126,7 +126,7 @@ local mappings = {
   },
   l = {
     name = "LSP",
-    a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     d = {
       "<cmd>Telescope diagnostics<cr>",
       "Document Diagnostics",
@@ -136,29 +136,27 @@ local mappings = {
       "Workspace Diagnostics",
     },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
-    g = { "<cmd>Lspsaga show_line_diagnostics<cr>", "Show Line Diagnostics" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
-      "<cmd>Lspsaga diagnostic_jump_next<cr>",
+      "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
       "Next Diagnostic",
     },
     k = {
-      "<cmd>Lspsaga diagnostic_jump_prev<cr>",
+      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
       "Prev Diagnostic",
     },
-    K = { "<cmd>Lspsaga hover_doc<cr>", "Hover Document" },
+    -- K = { "<cmd>Lspsaga hover_doc<cr>", "Hover Document" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     n = { "<cmd>NullLsInfo<cr>", "Null-ls Info" },
     q = { "<cmd>lua vim.diagnostic.setqflist({open=true})<cr>", "Quickfix" },
-    r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     R = { "<cmd>Telescope lsp_references<cr>", "References" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
     },
-    x = { "<c-u>Lspsaga range_code_action<cr>", "Range Code Action" },
   },
   s = {
     name = "Search",

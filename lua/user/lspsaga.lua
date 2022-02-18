@@ -1,4 +1,4 @@
-local status_ok, lspsaga = pcall(require, "lspsaga")
+local status_ok, lspsaga = pcall(require "lspsaga")
 if not status_ok then
   return
 end
@@ -7,13 +7,13 @@ lspsaga.setup {
   debug = false,
   use_saga_diagnostic_sign = true,
   -- diagnostic sign
-  error_sign = "",
-  warn_sign = "",
-  hint_sign = "",
-  infor_sign = "",
+  error_sign = "e",
+  warn_sign = "w",
+  hint_sign = "h",
+  infor_sign = "i",
   diagnostic_header_icon = "   ",
   -- code action title icon
-  code_action_icon = " ",
+  -- code_action_icon = " ",
   code_action_prompt = {
     enable = true,
     sign = true,

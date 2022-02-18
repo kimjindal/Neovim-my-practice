@@ -47,7 +47,7 @@ return packer.startup {
     use "nvim-lua/popup.nvim"
     use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
-    use "ggandor/lightspeed.nvim" -- This is like sneak or easymotion
+    use "ggandor/lightspeed.nvim"
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
     -- LSP
@@ -55,21 +55,12 @@ return packer.startup {
     use "williamboman/nvim-lsp-installer"
     use "tamago324/nlsp-settings.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
-    use { "jose-elias-alvarez/nvim-lsp-ts-utils" }
-    use { "tami5/lspsaga.nvim", config = "require('user.lspsaga')" }
-    -- use "digitaltoad/vim-pug" -- Vim syntax highlighting for Pug(Jade)
-    -- use {
-    --   "j-hui/fidget.nvim",
-    --   config = function()
-    --     require("fidget").setup {}
-    --   end,
-    --   after = "null-ls.nvim",
-    -- }
+    use "jose-elias-alvarez/nvim-lsp-ts-utils"
+    use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
 
     -- cmp & snippet pluins
     use {
       "hrsh7th/nvim-cmp",
-      -- event = "BufRead",
       requires = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -93,27 +84,27 @@ return packer.startup {
       run = ":TSUpdate",
       config = "require('user.treesitter')",
     }
-
     use { "windwp/nvim-autopairs", config = "require('user.autopairs')", after = "nvim-cmp" }
-    use { "andymass/vim-matchup", event = "VimEnter" }
-    use { "numToStr/Comment.nvim", config = "require('user.comment')" }
+    use { "andymass/vim-matchup", event = "BufRead" }
+    use { "numToStr/Comment.nvim", config = "require('user.comment')", event = "BufRead" }
     use { "ur4ltz/surround.nvim", config = "require('user.surround')", event = "BufRead" }
 
     -- File explorer
-    use "kyazdani42/nvim-tree.lua"
+    use {
+      "kyazdani42/nvim-tree.lua",
+      event = "BufRead",
+      config = "require('user.nvim-tree')",
+    }
     use {
       "akinsho/bufferline.nvim",
       event = "BufWinEnter",
       config = "require('user.bufferline')",
     }
-    use "moll/vim-bbye"
-    use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')" }
-    use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufRead" }
-    use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+    use { "moll/vim-bbye", event = "BufRead" }
     use {
       "lukas-reineke/indent-blankline.nvim",
       config = "require('user.indentline')",
-      event = "BufRead",
+      event = "BufWinEnter",
     }
 
     -- Startify
@@ -150,26 +141,15 @@ return packer.startup {
       cmd = "Telescope",
       config = "require('user.telescope')",
     }
+    use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')", event = "BufRead" }
+    use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufRead" }
 
     -- Git
     use {
       "lewis6991/gitsigns.nvim",
-      event = "BufRead",
       config = "require('user.gitsigns')",
+      event = "BufRead",
     }
-
-    -- Flutter
-    -- use {
-    --   "akinsho/flutter-tools.nvim",
-    --   config = "require('user.flutter')",
-    -- }
-
-    -- Markdown
-    -- use {
-    --   "iamcco/markdown-preview.nvim",
-    --   run = "cd app && yarn install",
-    --   cmd = "MarkdownPreview",
-    -- }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
