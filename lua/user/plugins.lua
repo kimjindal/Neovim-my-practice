@@ -41,13 +41,13 @@ packer.init {
 -- Install your plugins here
 return packer.startup {
   function(use)
-    -- My plugins here
+    -- Dependency plugins here
     use "wbthomason/packer.nvim"
     use "nvim-lua/plenary.nvim"
-    use "nvim-lua/popup.nvim"
     use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
-    use "ggandor/lightspeed.nvim"
+    use { "ggandor/lightspeed.nvim", commit = "4d8359a30b26ee5316d0e7c79af08b10cb17a57b", event = "BufRead" }
+    use { "nvim-lua/popup.nvim", event = "BufRead" }
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
     -- LSP
@@ -88,6 +88,7 @@ return packer.startup {
     use { "andymass/vim-matchup", event = "BufRead" }
     use { "numToStr/Comment.nvim", config = "require('user.comment')", event = "BufRead" }
     use { "ur4ltz/surround.nvim", config = "require('user.surround')", event = "BufRead" }
+    use { "mustache/vim-mustache-handlebars", event = "BufRead" }
 
     -- File explorer
     use {

@@ -16,8 +16,16 @@
         "path": "./snippets/global.json"
       },
       {
+        "language": "html",
+        "path": "./snippets/html.json"
+      },
+      {
         "language": "javascript",
         "path": "./snippets/javascript.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/javascriptreact.json"
       },
       {
         "language": "lua",

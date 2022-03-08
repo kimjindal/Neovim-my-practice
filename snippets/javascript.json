@@ -2,5 +2,9 @@
   "scripts": {
     "prefix": "req",
     "body": "require('$1');$2"
+  },
+  "scripts": {
+    "prefix": "rc",
+    "body": "<$1 />$2"
   }
 }
