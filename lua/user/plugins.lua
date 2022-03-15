@@ -101,7 +101,8 @@ return packer.startup {
       event = "BufWinEnter",
       config = "require('user.bufferline')",
     }
-    use { "moll/vim-bbye", event = "BufRead" }
+    -- use { "moll/vim-bbye", event = "BufRead" }
+    use { "kazhala/close-buffers.nvim", event = "BufRead" }
     use {
       "lukas-reineke/indent-blankline.nvim",
       config = "require('user.indentline')",
@@ -128,6 +129,7 @@ return packer.startup {
       config = function()
         require("colorizer").setup {
           "css",
+          "scss",
           "javascript",
           "html",
           "lua",

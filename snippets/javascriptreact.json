@@ -1,4 +1,10 @@
 {
+  "insertCustomComponent": {
+    "body": ["<$1 />$2"],
+    "key": "insertCustomComponent",
+    "prefix": "cc",
+    "scope": "typescript,typescriptreact,javascript,javascriptreact"
+  },
   "exportType": {
     "body": ["export type ${1:first} = {${2:second}}"],
     "key": "exportType",

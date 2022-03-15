@@ -28,6 +28,10 @@
         "path": "./snippets/javascriptreact.json"
       },
       {
+        "language": "javascriptreact",
+        "path": "./snippets/javascriptreact.json"
+      },
+      {
         "language": "lua",
         "path": "./snippets/lua.json"
       }
