@@ -89,7 +89,7 @@ local mappings = {
   ["h"] = { "<Cmd>nohlsearch<CR>", "No Highlight" },
   ["j"] = { "o<Esc>", "Insert Blank Line" },
   ["m"] = { "<Cmd>lua require('material.functions').toggle_style()<CR>", "Material" },
-  ["o"] = { '<cmd>lua require("close_buffers").wipe({ type = "other" })<CR>', "Only buffer" },
+  ["o"] = { '<cmd>lua require("close_buffers").wipe({ type = "other" })<CR>', "Only Buffer" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
