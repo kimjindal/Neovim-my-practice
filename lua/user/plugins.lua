@@ -46,7 +46,7 @@ return packer.startup {
     use "nvim-lua/plenary.nvim"
     use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
-    use { "ggandor/lightspeed.nvim", commit = "4d8359a30b26ee5316d0e7c79af08b10cb17a57b", event = "BufRead" }
+    use { "ggandor/lightspeed.nvim", event = "BufRead" }
     use { "nvim-lua/popup.nvim", event = "BufRead" }
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
@@ -128,11 +128,7 @@ return packer.startup {
       "norcalli/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup {
-          "css",
-          "scss",
-          "javascript",
-          "html",
-          "lua",
+          css = { css = true },
         }
       end,
       event = "BufRead",

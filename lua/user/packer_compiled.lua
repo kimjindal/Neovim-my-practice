@@ -216,7 +216,7 @@ _G.packer_plugins = {
     only_config = true
   },
   ["nvim-colorizer.lua"] = {
-    config = { "\27LJ\2\n\\\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\6\0\0\bcss\tscss\15javascript\thtml\blua\nsetup\14colorizer\frequire\0" },
+    config = { "\27LJ\2\nR\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\bcss\1\0\0\1\0\1\bcss\2\nsetup\14colorizer\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -350,6 +350,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for nvim-treesitter]], true)
 require('user.treesitter')
 time([[Config for nvim-treesitter]], false)
+-- Config for: nvim-lspconfig
+time([[Config for nvim-lspconfig]], true)
+require('user.lsp')
+time([[Config for nvim-lspconfig]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require('user.cmp')
@@ -358,10 +362,6 @@ time([[Config for nvim-cmp]], false)
 time([[Config for darkplus.nvim]], true)
 vim.cmd('colorscheme darkplus')
 time([[Config for darkplus.nvim]], false)
--- Config for: nvim-lspconfig
-time([[Config for nvim-lspconfig]], true)
-require('user.lsp')
-time([[Config for nvim-lspconfig]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd nvim-autopairs ]]
@@ -380,8 +380,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'indent-blankline.nvim', 'bufferline.nvim', 'alpha-nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'Comment.nvim', 'lualine.nvim', 'nvim-tree.lua', 'gitsigns.nvim', 'close-buffers.nvim', 'vim-mustache-handlebars', 'vim-matchup', 'nvim-web-devicons', 'toggleterm.nvim', 'popup.nvim', 'nvim-colorizer.lua', 'lightspeed.nvim', 'surround.nvim', 'project.nvim', 'which-key.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-tree.lua', 'close-buffers.nvim', 'which-key.nvim', 'nvim-colorizer.lua', 'vim-mustache-handlebars', 'nvim-web-devicons', 'vim-matchup', 'Comment.nvim', 'lualine.nvim', 'lightspeed.nvim', 'toggleterm.nvim', 'gitsigns.nvim', 'popup.nvim', 'project.nvim', 'surround.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'bufferline.nvim', 'alpha-nvim', 'indent-blankline.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

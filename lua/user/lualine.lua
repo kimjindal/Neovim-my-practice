@@ -75,7 +75,7 @@ local lspname = {
     for _, client in ipairs(clients) do
       local filetypes = client.config.filetypes
       local autostart = client.config.autostart
-      if filetypes and autostart and vim.fn.index(filetypes, buf_ft) ~= -1 then
+      if autostart and client.name ~= "emmet_ls" and vim.fn.index(filetypes, buf_ft) ~= -1 then
         return client.name
       end
     end
@@ -116,8 +116,9 @@ lualine.setup {
     theme = "darkplus", -- auto
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
-    disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
-    always_divide_middle = true,
+    disabled_filetypes = { "alpha", "dashboard", "Outline" }, --  "NvimTree",
+    always_divide_middle = false,
+    globalstatus = true,
   },
   sections = {
     lualine_a = { mode },

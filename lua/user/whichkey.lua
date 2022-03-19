@@ -78,8 +78,7 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
-  -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["c"] = { '<cmd>lua require("close_buffers").delete({ type = "this" })<CR>', "Close Buffer" },
+  ["c"] = { '<cmd>lua require("close_buffers").delete({ type = "this", force=true })<CR>', "Close Buffer" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -90,7 +89,7 @@ local mappings = {
   ["j"] = { "o<Esc>", "Insert Blank Line" },
   ["m"] = { "<Cmd>lua require('material.functions').toggle_style()<CR>", "Material" },
   ["o"] = { '<cmd>lua require("close_buffers").wipe({ type = "other" })<CR>', "Only Buffer" },
-  ["q"] = { "<cmd>q!<CR>", "Quit" },
+  ["q"] = { "<cmd>q<CR>", "Quit" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["T"] = { "<cmd>Telescope colorscheme<cr>", "Themes" },
