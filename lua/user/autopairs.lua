@@ -20,7 +20,7 @@ npairs.setup {
     map = "<M-e>",
     chars = { "{", "[", "(", '"', "'" },
     pattern = string.gsub([[ [%'%"%)%>%s%]%)%}%,] ]], "%s+", ""),
-    offset = -1,
+    offset = 0,
     end_key = "$",
     keys = "qwertyuiopzxcvbnmasdfghjkl",
     check_comma = true,

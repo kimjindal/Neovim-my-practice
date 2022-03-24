@@ -43,9 +43,18 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
+vim.cmd [[hi rainbowcol1 guifg=#eee]]
 vim.cmd [[set whichwrap+=<,>,[,],h,l]]
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+vim.cmd [[
+  augroup file_autoread_trigger
+    autocmd!
+    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+    autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+  augroup end
+]]
 
 vim.g.cursorhold_updatetime = 100 -- set for FixCursorHold.nvim plugin
 vim.g.vsnip_snippet_dir = "~/.config/nvim/snippets/"

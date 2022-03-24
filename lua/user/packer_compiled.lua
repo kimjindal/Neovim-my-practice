@@ -263,6 +263,11 @@ _G.packer_plugins = {
     path = "/Users/apple/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
     url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
   },
+  ["nvim-ts-rainbow"] = {
+    loaded = true,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
+    url = "https://github.com/p00f/nvim-ts-rainbow"
+  },
   ["nvim-web-devicons"] = {
     loaded = false,
     needs_bufread = false,
@@ -302,6 +307,13 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/surround.nvim",
     url = "https://github.com/ur4ltz/surround.nvim"
+  },
+  ["telescope-luasnip.nvim"] = {
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/Users/apple/.local/share/nvim/site/pack/packer/opt/telescope-luasnip.nvim",
+    url = "https://github.com/benfowler/telescope-luasnip.nvim"
   },
   ["telescope.nvim"] = {
     commands = { "Telescope" },
@@ -346,6 +358,38 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+local module_lazy_loads = {
+  ["^telescope%._extensions%.luasnip"] = "telescope-luasnip.nvim"
+}
+local lazy_load_called = {['packer.load'] = true}
+local function lazy_load_module(module_name)
+  local to_load = {}
+  if lazy_load_called[module_name] then return nil end
+  lazy_load_called[module_name] = true
+  for module_pat, plugin_name in pairs(module_lazy_loads) do
+    if not _G.packer_plugins[plugin_name].loaded and string.match(module_name, module_pat) then
+      to_load[#to_load + 1] = plugin_name
+    end
+  end
+
+  if #to_load > 0 then
+    require('packer.load')(to_load, {module = module_name}, _G.packer_plugins)
+    local loaded_mod = package.loaded[module_name]
+    if loaded_mod then
+      return function(modname) return loaded_mod end
+    end
+  end
+end
+
+if not vim.g.packer_custom_loader_enabled then
+  table.insert(package.loaders, 1, lazy_load_module)
+  vim.g.packer_custom_loader_enabled = true
+end
+
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require('user.cmp')
+time([[Config for nvim-cmp]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 require('user.treesitter')
@@ -354,10 +398,6 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for nvim-lspconfig]], true)
 require('user.lsp')
 time([[Config for nvim-lspconfig]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require('user.cmp')
-time([[Config for nvim-cmp]], false)
 -- Config for: darkplus.nvim
 time([[Config for darkplus.nvim]], true)
 vim.cmd('colorscheme darkplus')
@@ -380,8 +420,8 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au BufRead * ++once lua require("packer.load")({'nvim-tree.lua', 'close-buffers.nvim', 'which-key.nvim', 'nvim-colorizer.lua', 'vim-mustache-handlebars', 'nvim-web-devicons', 'vim-matchup', 'Comment.nvim', 'lualine.nvim', 'lightspeed.nvim', 'toggleterm.nvim', 'gitsigns.nvim', 'popup.nvim', 'project.nvim', 'surround.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
-vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'bufferline.nvim', 'alpha-nvim', 'indent-blankline.nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'which-key.nvim', 'nvim-colorizer.lua', 'vim-mustache-handlebars', 'vim-matchup', 'toggleterm.nvim', 'lualine.nvim', 'lightspeed.nvim', 'project.nvim', 'surround.nvim', 'gitsigns.nvim', 'close-buffers.nvim', 'popup.nvim', 'nvim-web-devicons', 'Comment.nvim', 'nvim-tree.lua'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au BufWinEnter * ++once lua require("packer.load")({'indent-blankline.nvim', 'bufferline.nvim', 'alpha-nvim'}, { event = "BufWinEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

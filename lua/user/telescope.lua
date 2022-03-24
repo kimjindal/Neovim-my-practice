@@ -3,10 +3,8 @@ if not status_ok then
   return
 end
 
--- Telescope extension telescope-media-files.nvim
--- ONLY SUPPORTED ON LINUX
--- telescope.load_extension('media_files')
 -- telescope.load_extension('flutter')
+telescope.load_extension "luasnip"
 
 local actions = require "telescope.actions"
 
@@ -14,7 +12,6 @@ telescope.setup {
   defaults = {
 
     layout_config = {
-      -- prompt_position = "bottom",
       horizontal = {
         width_padding = 0.04,
         height_padding = 0.1,
@@ -60,7 +57,7 @@ telescope.setup {
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-l>"] = actions.complete_tag,
-        ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+        ["<C-_>"] = actions.which_key,
       },
 
       n = {

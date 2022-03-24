@@ -80,6 +80,7 @@ return packer.startup {
       requires = {
         "JoosepAlviste/nvim-ts-context-commentstring",
         "windwp/nvim-ts-autotag",
+        "p00f/nvim-ts-rainbow",
       },
       run = ":TSUpdate",
       config = "require('user.treesitter')",
@@ -101,7 +102,6 @@ return packer.startup {
       event = "BufWinEnter",
       config = "require('user.bufferline')",
     }
-    -- use { "moll/vim-bbye", event = "BufRead" }
     use { "kazhala/close-buffers.nvim", event = "BufRead" }
     use {
       "lukas-reineke/indent-blankline.nvim",
@@ -142,6 +142,7 @@ return packer.startup {
     }
     use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')", event = "BufRead" }
     use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufRead" }
+    use { "benfowler/telescope-luasnip.nvim", module = "telescope._extensions.luasnip" }
 
     -- Git
     use {
