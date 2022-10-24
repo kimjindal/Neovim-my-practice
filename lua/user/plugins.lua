@@ -57,6 +57,7 @@ return packer.startup {
     use "jose-elias-alvarez/null-ls.nvim"
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
     use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+    use { "RRethy/vim-illuminate", commit = "a2e8476af3f3e993bb0d6477438aad3096512e42" }
 
     -- cmp & snippet pluins
     use {

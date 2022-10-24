@@ -13,23 +13,9 @@ local codeactions = null_ls.builtins.code_actions
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier.with {
-      extra_filetypes = { "toml" },
-      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-    },
+    formatting.prettier,
     formatting.stylua,
     codeactions.gitsigns,
     -- diagnostics.eslint,
   },
-
-  -- on_attach = function(client)
-  --   if client.resolved_capabilities.document_formatting then
-  --     vim.cmd [[
-  --       augroup LspFormatting
-  --           autocmd! * <buffer>
-  --           autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-  --       augroup END
-  --     ]]
-  --   end
-  -- end,
 }
