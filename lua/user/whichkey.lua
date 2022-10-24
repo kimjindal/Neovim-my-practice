@@ -11,27 +11,20 @@ local setup = {
       enabled = true,
       suggestions = 20,
     },
-
     presets = {
       operators = false,
-      motions = false,
-      text_objects = false,
+      motions = true,
+      text_objects = true,
       windows = true,
       nav = true,
       z = true,
       g = true,
     },
   },
-  key_labels = {
-    -- override the label used to display some keys. It doesn't effect WK in any other way.
-    -- For example:
-    -- ["<space>"] = "SPC",
-    -- ["<cr>"] = "RET",
-    -- ["<tab>"] = "TAB",
-  },
+  key_labels = {},
   icons = {
     breadcrumb = "»",
-    separator = "",
+    separator = "➜",
     group = "+",
   },
   popup_mappings = {
@@ -39,7 +32,7 @@ local setup = {
     scroll_up = "<c-u>",
   },
   window = {
-    border = "rounded",
+    border = "none", --rounded
     position = "bottom",
     margin = { 1, 0, 1, 0 },
     padding = { 2, 2, 2, 2 },
@@ -55,7 +48,6 @@ local setup = {
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
   show_help = true,
   triggers = "auto",
-  -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     i = { "j", "k" },
     v = { "j", "k" },
@@ -72,7 +64,7 @@ local opts = {
 }
 
 local mappings = {
-  ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+  ["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["b"] = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -162,7 +154,9 @@ local mappings = {
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    f = { "<cmd>Telescope quickfixhistory<cr>", "Quickfix History" },
+    h = { "<cmd>Telescope command_history<cr>", "Command History" },
+    H = { "<cmd>Telescope help_tags<cr>", "Find Help" },
     j = { "<cmd>Telescope jumplist<cr>", "Jump List" },
     m = { "<cmd>Telescope marks<cr>", "Find Marks" },
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },

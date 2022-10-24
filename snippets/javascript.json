@@ -14,5 +14,35 @@
         "prefix": "cp",
         "description": "Add a React component props",
         "body": "${1:props}={${1:props}}$2"
+    },
+    "ImportComponent": {
+        "key": "ImportComponent",
+        "prefix": "imc",
+        "description": "Import a coustom component",
+        "body": "import ${1:component} from './$2${1:component}'$3"
+    },
+    "ReactRouterComponentTag": {
+        "key": "ReactBrowserRouterComponentTag",
+        "prefix": "rous",
+        "description": "Creates a React Browser Router Component Tag",
+        "body": [
+            "<Router>",
+            "    <Routes>",
+            "        <Route path='${1:/*}' element={<${2:App} />} />",
+            "    </Routes>",
+            "</Router>"
+        ]
+    },
+    "ReactRoutePathComponentTag": {
+        "key": "ReactRoutePathComponentTag",
+        "prefix": "roup",
+        "description": "Creates a React Route Path Component Tag",
+        "body": ["<Route path='${1:/}'>", "    <$2 />", "</Route>"]
+    },
+    "ReactRouteComponentTag": {
+        "key": "ReactRouteComponentTag",
+        "prefix": "rouc",
+        "description": "Creates a React Route Component Tag",
+        "body": "<Route path='${1:/}' component={${2:App}} />"
     }
 }

@@ -44,9 +44,22 @@ for k, v in pairs(options) do
 end
 
 vim.cmd [[hi rainbowcol1 guifg=#eee]]
-vim.cmd [[set whichwrap+=<,>,[,],h,l]]
+vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+-- Folding
+-- vim.cmd [[set foldlevel=20]]
+-- vim.cmd [[set foldmethod=expr]]
+-- vim.cmd [[set foldexpr=nvim_treesitter#foldexpr()]]
+vim.cmd [[
+    function FoldConfig()
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
+    endfunction
+    autocmd BufAdd,BufEnter,BufNew,BufNewFile,BufWinEnter * :call FoldConfig()
+]]
+vim.wo.foldenable = false
 
 vim.cmd [[
   augroup file_autoread_trigger

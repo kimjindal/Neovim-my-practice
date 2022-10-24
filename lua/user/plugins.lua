@@ -46,7 +46,7 @@ return packer.startup {
     use "nvim-lua/plenary.nvim"
     use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
-    use { "ggandor/lightspeed.nvim", event = "BufRead" }
+    use "ggandor/lightspeed.nvim"
     use { "nvim-lua/popup.nvim", event = "BufRead" }
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
@@ -88,7 +88,15 @@ return packer.startup {
     use { "windwp/nvim-autopairs", config = "require('user.autopairs')", after = "nvim-cmp" }
     use { "andymass/vim-matchup", event = "BufRead" }
     use { "numToStr/Comment.nvim", config = "require('user.comment')", event = "BufRead" }
-    use { "ur4ltz/surround.nvim", config = "require('user.surround')", event = "BufRead" }
+    -- use { "ur4ltz/surround.nvim", config = "require('user.surround')", event = "BufRead" }
+    use {
+      "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup {
+          -- Configuration here, or leave empty to use defaults
+        }
+      end,
+    }
     use { "mustache/vim-mustache-handlebars", event = "BufRead" }
 
     -- File explorer
@@ -99,6 +107,7 @@ return packer.startup {
     }
     use {
       "akinsho/bufferline.nvim",
+      tag = "v2.*",
       event = "BufWinEnter",
       config = "require('user.bufferline')",
     }
@@ -118,7 +127,8 @@ return packer.startup {
     use { "folke/which-key.nvim", config = "require('user.whichkey')", event = "BufRead" }
 
     -- Colorschemes
-    use { "lunarvim/darkplus.nvim", config = "vim.cmd('colorscheme darkplus')" }
+    use { "Yazeed1s/minimal.nvim" }
+    use { "lunarvim/darkplus.nvim", commit = "13ef9daad28d3cf6c5e793acfc16ddbf456e1c83" }
     use {
       "nvim-lualine/lualine.nvim",
       event = "BufRead",
@@ -149,6 +159,14 @@ return packer.startup {
       "lewis6991/gitsigns.nvim",
       config = "require('user.gitsigns')",
       event = "BufRead",
+    }
+
+    -- Folding
+    use {
+      "anuvyklack/pretty-fold.nvim",
+      config = function()
+        require("pretty-fold").setup()
+      end,
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

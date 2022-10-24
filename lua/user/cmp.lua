@@ -68,7 +68,7 @@ cmp.setup {
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<C-o>"] = cmp.mapping(function(fallback) -- <Tap>
+    ["<Tab>"] = cmp.mapping(function(fallback) -- <Tab>
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expandable() then
@@ -84,7 +84,7 @@ cmp.setup {
       "i",
       "s",
     }),
-    ["<C-i>"] = cmp.mapping(function(fallback) -- <S-Tab>
+    ["<S-Tab>"] = cmp.mapping(function(fallback) -- <S-Tab>
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -101,13 +101,13 @@ cmp.setup {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      vim_item.kind = kind_icons[vim_item.kind]
       vim_item.menu = ({
-        luasnip = "[Snippet]",
-        nvim_lsp = "[Lsp]",
-        nvim_lua = "[Lua]",
-        buffer = "[Buffer]",
-        path = "[Path]",
+        luasnip = "",
+        nvim_lsp = "",
+        nvim_lua = "",
+        buffer = "",
+        path = "",
       })[entry.source.name]
       return vim_item
     end,
@@ -123,11 +123,11 @@ cmp.setup {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
   experimental = {
-    ghost_text = false,
-    native_menu = false,
+    ghost_text = true,
   },
 }

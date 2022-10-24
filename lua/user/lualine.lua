@@ -83,6 +83,7 @@ local lspname = {
   end,
   icons_enabled = true,
   icon = "",
+  colored = false,
 }
 
 local branch = {
@@ -113,7 +114,7 @@ end
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = "darkplus", -- auto
+    theme = "darkplus", -- darkplus | auto
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
     disabled_filetypes = { "alpha", "dashboard", "Outline" }, --  "NvimTree",
