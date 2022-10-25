@@ -36,6 +36,9 @@ packer.init {
       return require("packer.util").float { border = "rounded" }
     end,
   },
+  git = {
+    clone_timeout = 300, -- Timeout, in seconds, for git clones
+  },
 }
 
 -- Install your plugins here
@@ -51,12 +54,13 @@ return packer.startup {
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
     -- LSP
-    use { "neovim/nvim-lspconfig", config = "require('user.lsp')" }
-    use "williamboman/nvim-lsp-installer"
-    use "tamago324/nlsp-settings.nvim"
-    use "jose-elias-alvarez/null-ls.nvim"
-    use "jose-elias-alvarez/nvim-lsp-ts-utils"
-    use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+    -- use "williamboman/nvim-lsp-installer"
+    -- use "tamago324/nlsp-settings.nvim"
+    -- use "jose-elias-alvarez/nvim-lsp-ts-utils"
+    use { "neovim/nvim-lspconfig" }
+    use { "williamboman/mason.nvim", commit = "c2002d7a6b5a72ba02388548cfaf420b864fbc12" }
+    use { "williamboman/mason-lspconfig.nvim", commit = "0051870dd728f4988110a1b2d47f4a4510213e31" }
+    use { "jose-elias-alvarez/null-ls.nvim", commit = "c0c19f32b614b3921e17886c541c13a72748d450" } -- for formatters and linters
     use { "RRethy/vim-illuminate", commit = "a2e8476af3f3e993bb0d6477438aad3096512e42" }
 
     -- cmp & snippet pluins
@@ -177,7 +181,7 @@ return packer.startup {
     end
   end,
   -- Lazyloading packer_compiled file path for impatient.nvim
-  config = {
-    compile_path = vim.fn.stdpath "config" .. "/lua/user/packer_compiled.lua",
-  },
+  -- config = {
+  --   compile_path = vim.fn.stdpath "config" .. "/lua/user/packer_compiled.lua",
+  -- },
 }

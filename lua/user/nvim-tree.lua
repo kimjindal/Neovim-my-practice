@@ -9,6 +9,7 @@ if not config_status_ok then
 end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
+
 nvim_tree.setup {
   update_focused_file = {
     enable = true,
@@ -46,15 +47,14 @@ nvim_tree.setup {
     enable = true,
     show_on_dirs = true,
     icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
+      hint = "?",
+      info = "i",
+      warning = "!",
+      error = "e",
     },
   },
   view = {
     width = 30,
-    -- height = 30,
     side = "left",
     mappings = {
       list = {

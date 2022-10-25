@@ -32,7 +32,7 @@ local setup = {
     scroll_up = "<c-u>",
   },
   window = {
-    border = "none", --rounded
+    border = "rounded", -- none
     position = "bottom",
     margin = { 1, 0, 1, 0 },
     padding = { 2, 2, 2, 2 },
@@ -78,11 +78,12 @@ local mappings = {
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
-  ["h"] = { "<Cmd>nohlsearch<CR>", "No Highlight" },
   ["j"] = { "o<Esc>", "Insert Blank Line" },
+  ["n"] = { "<Cmd>nohlsearch<CR>", "No Highlight" },
   ["o"] = { '<cmd>lua require("close_buffers").wipe({ type = "other" })<CR>', "Only Buffer" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["q"] = { "<cmd>q<CR>", "Quit" },
+  ["r"] = { "<cmd>set rnu!<CR>", "Relative Number" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   p = {
     name = "Packer",
@@ -127,7 +128,7 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
