@@ -71,7 +71,6 @@ local mappings = {
     "Buffers",
   },
   ["c"] = { '<cmd>lua require("close_buffers").delete({ type = "this", force=true })<CR>', "Close Buffer" },
-  ["C"] = { "<C-w>c", "Close Window" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
@@ -84,6 +83,7 @@ local mappings = {
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["q"] = { "<cmd>q<CR>", "Quit" },
   ["r"] = { "<cmd>set rnu!<CR>", "Relative Number" },
+  ["v"] = { "<cmd>r !pbpaste<CR>", "From clipboard" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   p = {
     name = "Packer",
@@ -176,6 +176,13 @@ local mappings = {
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+  },
+  W = {
+    name = "Split Window",
+    c = { "<C-w>c", "Close Window" },
+    h = { "<C-w>s", "Split Horizontal" },
+    v = { "<C-w>v", "Split Vertical" },
+    m = { "<cmd>MaximizerToggle<CR>", "Maximized Window" },
   },
 }
 

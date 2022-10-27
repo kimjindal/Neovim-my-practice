@@ -50,6 +50,7 @@ return packer.startup {
     use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
     use "ggandor/lightspeed.nvim"
+    use "szw/vim-maximizer"
     use { "nvim-lua/popup.nvim", event = "BufRead" }
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
@@ -93,7 +94,6 @@ return packer.startup {
     use { "windwp/nvim-autopairs", config = "require('user.autopairs')", after = "nvim-cmp" }
     use { "andymass/vim-matchup", event = "BufRead" }
     use { "numToStr/Comment.nvim", config = "require('user.comment')", event = "BufRead" }
-    -- use { "ur4ltz/surround.nvim", config = "require('user.surround')", event = "BufRead" }
     use {
       "kylechui/nvim-surround",
       config = function()

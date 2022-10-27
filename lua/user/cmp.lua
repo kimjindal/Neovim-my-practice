@@ -8,6 +8,10 @@ if not snip_status_ok then
   return
 end
 
+local T = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
 -- LuaSnip: Vscode-like snippets Loader
 require("luasnip.loaders.from_vscode").lazy_load()
 -- For using snippets from a "friendly-snippets" plugin
@@ -68,27 +72,26 @@ cmp.setup {
     -- Accept currently selected item. If none selected, `select` first item.
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
-    ["<Tab>"] = cmp.mapping(function(fallback) -- <Tab>
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(T "<C-j>", "n")
       elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+        vim.fn.feedkeys(T "<Plug>luasnip-expand-or-jump", "")
       elseif check_backspace() then
-        fallback()
+        vim.fn.feedkeys(T "<Tab>", "n")
       else
+        vim.fn.feedkeys(T "<C-Space>") -- Manual trigger
         fallback()
       end
     end, {
       "i",
       "s",
     }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback) -- <S-Tab>
-      if cmp.visible() then
-        cmp.select_prev_item()
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(T "<C-k>", "n")
       elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+        vim.fn.feedkeys(T "<Plug>luasnip-jump-prev", "")
       else
         fallback()
       end
