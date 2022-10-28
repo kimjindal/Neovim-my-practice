@@ -47,132 +47,80 @@ return packer.startup {
     -- Dependency plugins here
     use "wbthomason/packer.nvim"
     use "nvim-lua/plenary.nvim"
-    use "nathom/filetype.nvim"
     use "lewis6991/impatient.nvim"
     use "ggandor/lightspeed.nvim"
     use "szw/vim-maximizer"
-    use { "nvim-lua/popup.nvim", event = "BufRead" }
+
+    -- Surround selections
+    use { "kylechui/nvim-surround", tag = "*", config = "require('user.surround')" }
+
+    -- Commenting with gc
+    use { "numToStr/Comment.nvim", config = "require('user.comment')" }
+    use { "JoosepAlviste/nvim-ts-context-commentstring", commit = "4d3a68c41a53add8804f471fcc49bb398fe8de08" }
+
+    -- Vscode like icons
     use { "kyazdani42/nvim-web-devicons", event = "BufRead" }
 
-    -- LSP
-    -- use "williamboman/nvim-lsp-installer"
-    -- use "tamago324/nlsp-settings.nvim"
-    -- use "jose-elias-alvarez/nvim-lsp-ts-utils"
-    use { "neovim/nvim-lspconfig" }
+    -- Statusline
+    use { "nvim-lualine/lualine.nvim", config = "require('user.lualine')", event = "BufRead" }
+
+    -- Telescope
+    use { "nvim-telescope/telescope.nvim", cmd = "Telescope", config = "require('user.telescope')" }
+    use { "benfowler/telescope-luasnip.nvim", module = "telescope._extensions.luasnip" }
+    use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufRead" }
+
+    -- cmp autocompletion
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-nvim-lua"
+    use "saadparwaiz1/cmp_luasnip"
+
+    -- snippets
+    use "L3MON4D3/LuaSnip"
+    use "rafamadriz/friendly-snippets"
+
+    -- LSP managing & installing lsp servers, linters & formatters
     use { "williamboman/mason.nvim", commit = "c2002d7a6b5a72ba02388548cfaf420b864fbc12" }
     use { "williamboman/mason-lspconfig.nvim", commit = "0051870dd728f4988110a1b2d47f4a4510213e31" }
-    use { "jose-elias-alvarez/null-ls.nvim", commit = "c0c19f32b614b3921e17886c541c13a72748d450" } -- for formatters and linters
     use { "RRethy/vim-illuminate", commit = "a2e8476af3f3e993bb0d6477438aad3096512e42" }
 
-    -- cmp & snippet pluins
-    use {
-      "hrsh7th/nvim-cmp",
-      requires = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-nvim-lua",
-        "hrsh7th/cmp-cmdline",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
-        "rafamadriz/friendly-snippets",
-      },
-      config = "require('user.cmp')",
-    }
+    -- LSP configuring lsp servers
+    use "neovim/nvim-lspconfig"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "onsails/lspkind.nvim" -- vscode like icons for autocompletion
+    -- use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+
+    -- Formatting & linting
+    use { "jose-elias-alvarez/null-ls.nvim", commit = "c0c19f32b614b3921e17886c541c13a72748d450" }
+    -- use("jayp0521/mason-null-ls.nvim") -- bridges gap b/w mason & null-ls
 
     -- Treesitter
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      requires = {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        "windwp/nvim-ts-autotag",
-        "p00f/nvim-ts-rainbow",
-      },
-      run = ":TSUpdate",
-      config = "require('user.treesitter')",
-    }
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = "require('user.treesitter')" }
     use { "windwp/nvim-autopairs", config = "require('user.autopairs')", after = "nvim-cmp" }
-    use { "andymass/vim-matchup", event = "BufRead" }
-    use { "numToStr/Comment.nvim", config = "require('user.comment')", event = "BufRead" }
-    use {
-      "kylechui/nvim-surround",
-      config = function()
-        require("nvim-surround").setup {
-          -- Configuration here, or leave empty to use defaults
-        }
-      end,
-    }
-    use { "mustache/vim-mustache-handlebars", event = "BufRead" }
+    use { "windwp/nvim-ts-autotag", after = "nvim-treesitter" }
+    use { "David-Kunz/markid", after = "nvim-treesitter" } -- same_name identifiers with the same color
 
     -- File explorer
-    use {
-      "kyazdani42/nvim-tree.lua",
-      event = "BufRead",
-      config = "require('user.nvim-tree')",
-    }
-    use {
-      "akinsho/bufferline.nvim",
-      tag = "v2.*",
-      event = "BufWinEnter",
-      config = "require('user.bufferline')",
-    }
+    use { "kyazdani42/nvim-tree.lua", config = "require('user.nvim-tree')", event = "BufRead" }
+    use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')", event = "BufRead" }
+    use { "akinsho/bufferline.nvim", tag = "v2.*", event = "BufWinEnter", config = "require('user.bufferline')" }
     use { "kazhala/close-buffers.nvim", event = "BufRead" }
-    use {
-      "lukas-reineke/indent-blankline.nvim",
-      config = "require('user.indentline')",
-      event = "BufWinEnter",
-    }
+    use { "lukas-reineke/indent-blankline.nvim", config = "require('user.indentline')", event = "BufWinEnter" }
 
     -- Startify
-    use {
-      "goolord/alpha-nvim",
-      event = "BufWinEnter",
-      config = "require('user.alpha')",
-    }
+    use { "goolord/alpha-nvim", event = "BufWinEnter", config = "require('user.alpha')" }
     use { "folke/which-key.nvim", config = "require('user.whichkey')", event = "BufRead" }
 
     -- Colorschemes
     use { "Yazeed1s/minimal.nvim" }
     use { "lunarvim/darkplus.nvim", commit = "13ef9daad28d3cf6c5e793acfc16ddbf456e1c83" }
-    use {
-      "nvim-lualine/lualine.nvim",
-      event = "BufRead",
-      config = "require('user.lualine')",
-    }
-    use {
-      "norcalli/nvim-colorizer.lua",
-      config = function()
-        require("colorizer").setup {
-          css = { css = true },
-        }
-      end,
-      event = "BufRead",
-    }
-
-    -- Telescope
-    use {
-      "nvim-telescope/telescope.nvim",
-      cmd = "Telescope",
-      config = "require('user.telescope')",
-    }
-    use { "akinsho/toggleterm.nvim", config = "require('user.toggleterm')", event = "BufRead" }
-    use { "ahmedkhalf/project.nvim", config = "require('user.project')", event = "BufRead" }
-    use { "benfowler/telescope-luasnip.nvim", module = "telescope._extensions.luasnip" }
 
     -- Git
-    use {
-      "lewis6991/gitsigns.nvim",
-      config = "require('user.gitsigns')",
-      event = "BufRead",
-    }
+    use { "lewis6991/gitsigns.nvim", config = "require('user.gitsigns')", event = "BufRead" }
 
     -- Folding
-    use {
-      "anuvyklack/pretty-fold.nvim",
-      config = function()
-        require("pretty-fold").setup()
-      end,
-    }
+    use { "anuvyklack/pretty-fold.nvim", config = "require('user.pretty-fold')" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

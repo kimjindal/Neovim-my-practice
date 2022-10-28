@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.cmd [[
             nnoremap <silent> <buffer> q :close<CR> 
                   set nobuflisted 
-                ]]
+    ]]
   end,
 })
 

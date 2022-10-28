@@ -50,6 +50,7 @@ xnoremap <silent> <C-w>n :call <SID>splitNew('h', '__vscode_new__')<CR>
 
 nnoremap <silent> <C-w>= :<C-u>call VSCodeNotify('workbench.action.evenEditorWidths')<CR>
 xnoremap <silent> <C-w>= :<C-u>call VSCodeNotify('workbench.action.evenEditorWidths')<CR>
+nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorWidths')<CR>
 
 nnoremap <silent> <C-w>> :<C-u>call <SID>manageEditorSize(v:count, 'increase')<CR>
 xnoremap <silent> <C-w>> :<C-u>call <SID>manageEditorSize(v:count, 'increase')<CR>
@@ -76,11 +77,34 @@ xnoremap <silent> L :call <SID>switchEditor(v:count, 'next')<CR>
 nnoremap <silent> H :call <SID>switchEditor(v:count, 'prev')<CR>
 xnoremap <silent> H :call <SID>switchEditor(v:count, 'prev')<CR>
 
-" Bind C-/ to vscode commentary since calling from vscode produces double comments due to multiple cursors
-" xnoremap <silent> <C-/> :call Comment()<CR>
-" nnoremap <silent> <C-/> :call Comment()<CR>
+" Folding
+nnoremap <silent> za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
+nnoremap <silent> zR <Cmd>call VSCodeNotify('editor.unfoldAll')<CR>
+nnoremap <silent> zM <Cmd>call VSCodeNotify('editor.foldAll')<CR>
+nnoremap <silent> zo <Cmd>call VSCodeNotify('editor.unfold')<CR>
+nnoremap <silent> zO <Cmd>call VSCodeNotify('editor.unfoldRecursively')<CR>
+nnoremap <silent> zc <Cmd>call VSCodeNotify('editor.fold')<CR>
+nnoremap <silent> zC <Cmd>call VSCodeNotify('editor.foldRecursively')<CR>
+nnoremap <silent> z1 <Cmd>call VSCodeNotify('editor.foldLevel1')<CR>
+nnoremap <silent> z2 <Cmd>call VSCodeNotify('editor.foldLevel2')<CR>
+nnoremap <silent> z3 <Cmd>call VSCodeNotify('editor.foldLevel3')<CR>
+nnoremap <silent> z4 <Cmd>call VSCodeNotify('editor.foldLevel4')<CR>
+nnoremap <silent> z5 <Cmd>call VSCodeNotify('editor.foldLevel5')<CR>
+nnoremap <silent> z6 <Cmd>call VSCodeNotify('editor.foldLevel6')<CR>
+nnoremap <silent> z7 <Cmd>call VSCodeNotify('editor.foldLevel7')<CR>
+xnoremap <silent> zV <Cmd>call VSCodeNotify('editor.foldAllExcept')<CR>
 
-nnoremap <silent> <C-w>_ :<C-u>call VSCodeNotify('workbench.action.toggleEditorWidths')<CR>
+function! MoveCursor(direction) abort
+    if(reg_recording() == '' && reg_executing() == '')
+        return 'g'.a:direction
+    else
+        return a:direction
+    endif
+endfunction
 
+nnoremap <expr> j MoveCursor('j')
+nnoremap <expr> k MoveCursor('k')
+
+" Whichkey
 nnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>
 xnoremap <silent> <Space> :call VSCodeNotify('whichkey.show')<CR>

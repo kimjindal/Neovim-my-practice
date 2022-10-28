@@ -5,12 +5,9 @@ if exists('g:vscode')
   nmap gc  <Plug>VSCodeCommentary
   omap gc  <Plug>VSCodeCommentary
   nmap gcc <Plug>VSCodeCommentaryLine
-  nmap dsf ds)db
 
-  call plug#begin('~/.vim/plugged')
-    Plug 'tpope/vim-surround'
-  call plug#end()
+  " call plug#begin('~/.vim/plugged')
+  "   Plug 'tpope/vim-surround'
+  " call plug#end()
 
 endif
-
-

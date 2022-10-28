@@ -1,8 +1,3 @@
-local status_ts_ok, _ = pcall(require, "nvim-treesitter")
-if not status_ts_ok then
-  return
-end
-
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
   return
@@ -14,23 +9,22 @@ configs.setup {
     "javascript",
     "markdown",
     "lua",
+    "python",
+    "json",
+    "html",
+    "css",
+    "bash",
     "vim",
+    "gitignore",
   },
-  sync_install = false,
-  ignore_install = { "" },
-  highlight = {
+  highlight = { enable = true, disable = { "html", "css" } },
+  indent = { enable = true },
+  autopairs = { enable = true },
+  autotag = { enable = true },
+  context_commentstring = {
     enable = true,
-    disable = { "css" },
-    autopairs = {
-      enable = true,
-    },
-    indent = { enable = true, disable = { "python", "css" } },
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
-    rainbow = {
-      enable = true,
-    },
+    enable_autocmd = false,
   },
+  markid = { enable = true },
+  auto_install = true,
 }

@@ -8,49 +8,22 @@ if not snip_status_ok then
   return
 end
 
-local T = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+local lspkind_status_ok, lspkind = pcall(require, "lspkind")
+if not lspkind_status_ok then
+  return
 end
 
 -- LuaSnip: Vscode-like snippets Loader
 require("luasnip.loaders.from_vscode").lazy_load()
--- For using snippets from a "friendly-snippets" plugin
--- require("luasnip").filetype_extend("javascript", { "javascriptreact" })
--- require("luasnip").filetype_extend("dart", { "flutter" })
+
+local T = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
-
---   פּ ﯟ   some other good icons
-local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
 
 cmp.setup {
   snippet = {
@@ -100,25 +73,17 @@ cmp.setup {
       "s",
     }),
   },
+  -- configure lspkind for vscode like icons
   formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = kind_icons[vim_item.kind]
-      vim_item.menu = ({
-        luasnip = "",
-        nvim_lsp = "",
-        nvim_lua = "",
-        buffer = "",
-        path = "",
-      })[entry.source.name]
-      return vim_item
-    end,
+    format = lspkind.cmp_format {
+      maxwidth = 50,
+      ellipsis_char = "...",
+    },
   },
   sources = {
-    { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
+    { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
   },

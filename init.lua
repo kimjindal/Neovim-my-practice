@@ -4,6 +4,7 @@ else
   require "user.impatient"
   require "user.options"
   require "user.keymaps"
+  require "user.cmp"
   require "user.plugins"
   require "user.illuminate"
   require "user.colorscheme"
